@@ -1,0 +1,15 @@
+{
+  "name": "db82-draw-canvas",
+  "version": "0.1.0",
+  "description": "",
+  "main": "Draw-Canvas.js",
+  "dependencies": {
+    "db82-element-click-coordinates": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

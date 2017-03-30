@@ -1,0 +1,17 @@
+{
+  "name": "db82-collision-detection-broad-phase",
+  "version": "0.2.4",
+  "description": "",
+  "main": "Collision-Detection-Broad-Phase-Grid.js",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "db82-shape-overlap-functions": "^0.1.0"
+
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

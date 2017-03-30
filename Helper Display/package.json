@@ -1,0 +1,11 @@
+{
+  "name": "db82-helper-display",
+  "version": "0.1.2",
+  "description": "",
+  "main": "Helper-Display.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "db82-physics-body",
+  "version": "0.1.13",
+  "description": "",
+  "main": "Physics-Body.js",
+  "dependencies": {
+    "2d-vector-functions": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

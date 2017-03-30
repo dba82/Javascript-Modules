@@ -1,0 +1,269 @@
+<html>
+<head>
+	<meta charset="utf-8">	
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+	<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
+	<script src="https://gitcdn.xyz/repo/angular/bower-material/master/angular-material.js"></script>
+	<style>
+	.wheel{
+		margin: 50px;
+		justify-content: space-around;
+	}
+	*:focus{
+		outline:0;
+	}
+	</style>
+</head>
+<body 
+	ng-app="app" 
+	ng-controller="appCtrl as ctrl">
+	<div class="wheel md-layout-row">
+		<div class="md-layout-column">
+		<md-button  
+			class="md-raised" 
+			ng-click="ctrl.rotateRandomly()" 
+			value="">
+					Drehen
+		</md-button>
+			
+		<svg xmlns="http://www.w3.org/2000/svg" 
+				ng-attr-width="{{5+2*ctrl.cir.r}}" 
+				height="50">
+			<polygon class="wheel-pointer"
+				ng-attr-points="{{ctrl.cir.x-15}},0  {{ctrl.cir.x+15}},0  {{ctrl.cir.x}},50"
+         		style="fill:#cc3333;"/>
+		</svg>
+		<svg xmlns="http://www.w3.org/2000/svg" 
+			ng-style="{transform: 'rotateZ('+ ctrl.rotationangle + 'deg)'}"
+			ng-attr-width="{{5+2*ctrl.cir.r}}" 
+			ng-attr-height="{{5+2*ctrl.cir.r}}">
+			<circle 
+				ng-attr-cy="{{ctrl.cir.y}}"  
+				ng-attr-cx="{{ctrl.cir.x}}" 
+				ng-attr-r="{{ctrl.cir.r}}" fill="none" stroke="black" stroke-width="1">
+			</circle>
+			<path  stroke-opacity="1" fill-opacity="1" stroke="grey" stroke-width=".5" 
+				ng-repeat="slice in ctrl.slices"
+				ng-click="ctrl.toggleSliceSelection(slice)"
+				ng-attr-fill="{{slice.selected ? 'yellow' :  slice.color}}" 
+				ng-attr-d="{{ctrl.describeArc(ctrl.cir.x, ctrl.cir.y, ctrl.cir.r, slice.start, slice.end)}}"
+			></path>
+		</svg>
+		<md-button  class="md-raised" 
+			ng-click="ctrl.mergeSelectedSlices()">
+					Zusammenführen
+		</md-button>
+
+		</div>
+
+	<div>
+		<div style="background-color:{{ctrl.color}}"></div>
+    	<md-select ng-model="ctrl.color">
+        	<md-option 
+          		ng-repeat="color in ctrl.colors" 
+          		style="background-color:{{color}}" 
+          		value="{{color}}">
+          			{{color}}
+          	</md-option>
+       		</md-select>
+		<md-button  class="md-raised" 
+			ng-click="ctrl.colorSlices(); ctrl.resetSelection()">
+					Färben
+		</md-button>
+	</div>
+	<div>
+		<table>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>{{ctrl.experimentCount()}}</td>
+				</tr>
+				<tr ng-repeat="type in ctrl.types">
+					<td style="background-color:{{type.color}}"></td>
+					<td style="color:{{type.color}}">{{type.count}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+	<md-input-container>
+		<label>Anzahl der Basisteile</label>
+		<input 
+			ng-blur="ctrl.resetSelection(); ctrl.sliceCakeEqually(ctrl.baseN)" 
+			ng-model="ctrl.baseN">
+	</md-input-container>
+
+	<md-input-container>
+		<label>Anzahl der Teile</label>
+		<input ng-model="ctrl.n">
+	</md-input-container>
+<script>
+var app = angular.module('app', ['ngMaterial', 'ngAnimate']);
+
+var appCtrl = app.controller('appCtrl', function($timeout){
+	this.describeArc = describeArc;
+	this.sliceSlice = function(slice, cuts){
+		var size = slice.end-slice.start;
+		this.slices = this.slices.concat([0].concat(cuts).map(function(x, i){
+			var y = [0].concat(cuts)[i+1] || 1;
+			return {start: slice.start+size*x, end: slice.start+size*y};
+		}))
+	}
+	this.sliceSliceEqually = function(slice, n){
+		var size = slice.end-slice.start;
+		var m = 1/n;
+		var r = [];
+		var i = 1
+		while (i*m < 1){
+			r.push(i*m);
+			i++;
+		}
+		this.sliceSlice(slice, r);
+	}
+	this.sliceCake = function(cuts){
+		this.sliceSlice({start:0, end: 360}, cuts);	
+	}
+	this.sliceCakeEqually = function(n){
+		this.sliceSliceEqually({start: 0, end:360}, n);
+	}
+	this.mergeSlices = function(slice1, slice2){
+		var tmp = angular.copy(slice1);
+		if (slice1.start > slice2.start){
+			slice1 = angular.copy(slice2);
+			slice2 = tmp;
+		}
+		var r = {start: slice1.start, end: slice2.end};
+		return r;
+	}
+	this.orderSlices = function(){
+		this.slices.sort(function(a,b){
+			return a.label === b.label;
+		})
+	}
+	this.selectSlice = function(slice){
+		slice.selected = true;
+		this.sliceSelection.push(slice);
+	}
+	this.unselectSlice = function(slice){
+		slice.selected = false;
+		this.sliceSelection.splice(this.sliceSelection.indexOf(slice),1);
+	}
+	this.toggleSliceSelection = function(slice){
+		if (slice.selected){
+			this.unselectSlice(slice);
+		} else {
+			this.selectSlice(slice);
+		}
+	}
+	this.mergeSelectedSlices = function(){
+		var from = _.findIndex(this.slices, 'selected', true)
+		var until = _.findLastIndex(this.slices, 'selected', true)
+		for (var i = from; i<= until; i++){
+			this.unselectSlice(this.slices[i])
+		}
+		this.slices.splice(from, until-from+1, this.mergeSlices(this.slices[from], this.slices[until]));
+	}
+	this.endAngle = 0;
+	this.rotateTo = function(d, fn){
+		var that = this;
+		(function doit(){
+			$timeout(function(){
+				that.rotationangle += 1;
+				if (that.rotationangle < that.endAngle+d){
+					doit()
+				}
+				else {
+					that.endAngle += d;
+					fn();
+				}
+			}, 1)
+		})()
+	}
+	this.rotateRandomly = function(){
+		var that = this;
+		var setTypes = function(){
+			var mem = [];
+			if (!that.types.length){
+				that.slices.forEach(function(x){
+					if (mem.indexOf(x.color) === -1){
+						mem.push(x.color);
+						that.types.push({color: x.color, count: 0});
+					}
+				})
+			}
+		}
+		setTypes();
+		var increaseCount= function(){
+			var cur = that.getCurrentSector();
+			var type = that.types.filter(function(x){ return x.color === cur.color})[0];
+			type.count +=1;
+		}
+		var angle = 360 + Math.random()*360;
+		this.rotateTo(angle, increaseCount);
+	}
+	this.getCurrentSector = function(){
+		var that = this;
+		return _.find(this.slices, function(x){return x.start <= 360-(that.rotationangle%360) && x.end >= 360-(that.rotationangle%360)});
+	}
+	this.resetAngle = function(){
+		this.rotationangle = 0;
+		this.resetSelection();
+	}
+	this.resetSelection = function(){
+		this.sliceSelection.forEach(function(x){x.selected = false;})
+		this.sliceSelection = [];
+	}
+	this.colorSlices = function(){
+		var color = this.color;
+		this.sliceSelection.forEach(function(x){x.color=color;})
+		this.types = [];
+	}
+	this.experimentCount = function(){
+		if(this.types.length)return this.types.reduce(function(a,b){return a.count + b.count;});
+	}
+	this.colors = ["aliceblue","antiquewhite","aqua","aquamarine","azure","beige","bisque","black","blanchedalmond","blue","blueviolet","brown","burlywood","cadetblue","chartreuse","chocolate","coral","cornflowerblue","cornsilk","crimson","cyan","darkblue","darkcyan","darkgoldenrod","darkgray","darkgreen","darkgrey","darkkhaki","darkmagenta","darkolivegreen","darkorange","darkorchid","darkred","darksalmon","darkseagreen","darkslateblue","darkslategray","darkslategrey","darkturquoise","darkviolet","deeppink","deepskyblue","dimgray","dimgrey","dodgerblue","firebrick","floralwhite","forestgreen","fuchsia","gainsboro","ghostwhite","gold","goldenrod","gray","green","greenyellow","grey","honeydew","hotpink","indianred","indigo","ivory","khaki","lavender","lavenderblush","lawngreen","lemonchiffon","lightblue","lightcoral","lightcyan","lightgoldenrodyellow","lightgray","lightgreen","lightgrey","lightpink","lightsalmon","lightseagreen","lightskyblue","lightslategray","lightslategrey","lightsteelblue","lightyellow","lime","limegreen","linen","magenta","maroon","mediumaquamarine","mediumblue","mediumorchid","mediumpurple","mediumseagreen","mediumslateblue","mediumspringgreen","mediumturquoise","mediumvioletred","midnightblue","mintcream","mistyrose","moccasin","navajowhite","navy","oldlace","olive","olivedrab","orange","orangered","orchid","palegoldenrod","palegreen","paleturquoise","palevioletred","papayawhip","peachpuff","peru","pink","plum","powderblue","purple","red","rosybrown","royalblue","saddlebrown","salmon","sandybrown","seagreen","seashell","sienna","silver","skyblue","slateblue","slategray","slategrey","snow","springgreen","steelblue","tan","teal","thistle","tomato","turquoise","violet","wheat","white","whitesmoke","yellow","yellowgreen"]
+	var r = 200
+	this.cir = {
+		x: 2+r,
+		y: 2+r,
+		r: r
+	};
+	this.slices = [];
+	this.sliceSelection = []
+	this.types = [];
+	this.rotationangle = 0;
+	this.n = 1;
+	this.color = 'blue';
+	this.baseN = 6;
+	this.sliceCakeEqually(this.baseN );
+})
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+  return {
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
+  };
+}
+
+function describeArc(x, y, radius, startAngle, endAngle){
+    var start = polarToCartesian(x, y, radius, endAngle);
+    var end = polarToCartesian(x, y, radius, startAngle);
+    var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+    var d = [
+        "M", start.x, start.y, 
+        "A", radius, radius, 0, arcSweep, 0, end.x, end.y,
+        "L", x,y,
+        "L", start.x, start.y
+    ].join(" ");
+    return d;       
+}
+
+</script>
+
+</body>
+</html>

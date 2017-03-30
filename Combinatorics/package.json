@@ -1,0 +1,11 @@
+{
+  "name": "db82-combinatorics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Combinatorics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

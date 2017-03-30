@@ -1,0 +1,16 @@
+{
+  "name": "db82-physics-wall",
+  "version": "0.1.1",
+  "description": "",
+  "main": "Physics-Wall.js",
+  "dependencies": {
+    "db82-shape-analytics": "^0.1.4",
+    "db82-physics-body": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

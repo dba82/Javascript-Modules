@@ -1,0 +1,14 @@
+{
+  "name": "db82-collision-table",
+  "version": "0.1.5",
+  "description": "",
+  "main": "Collision-Table.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "db82-shape-intersection-detectors": "^0.1.0"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

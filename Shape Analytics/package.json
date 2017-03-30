@@ -1,0 +1,11 @@
+{
+  "name": "db82-shape-analytics",
+  "version": "0.1.4",
+  "description": "",
+  "main": "Shape-Analytics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

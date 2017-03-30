@@ -1,0 +1,14 @@
+{
+  "name": "2d-vector-functions",
+  "version": "2.0.5",
+  "main": "2D-Vector-Functions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Db82",
+  "license": "MIT",
+  "description": "",
+  "dependencies": [
+        "xmath"
+    ]
+}

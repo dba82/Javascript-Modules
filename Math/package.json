@@ -1,0 +1,11 @@
+{
+  "name": "xmath",
+  "version": "2.0.2",
+  "description": "",
+  "main": "Math.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Db82",
+  "license": "MIT"
+}

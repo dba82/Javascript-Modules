@@ -1,0 +1,14 @@
+{
+  "name": "db82-force-field",
+  "version": "0.1.6",
+  "description": "",
+  "main": "Force-Field.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "dependencies": {
+    "2d-vector-functions": "^2.0.4"
+  },
+  "license": "MIT"
+}

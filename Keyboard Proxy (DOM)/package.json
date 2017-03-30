@@ -1,0 +1,14 @@
+{
+  "name": "db82-keyboard-proxy",
+  "version": "0.1.6",
+  "description": "",
+  "main": "Keyboard-Proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "db82-keycodes": "^0.1.0"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

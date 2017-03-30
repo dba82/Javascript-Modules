@@ -1,0 +1,15 @@
+{
+  "name": "db82-shape-intersection-detectors",
+  "version": "0.1.7",
+  "description": "",
+  "main": "Shape-Intersection-Detectors.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "db82-shape-analytics" : "^0.1.0",
+    "db82-shape-point-containment-functions": "^0.1.0"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

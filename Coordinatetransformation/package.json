@@ -1,0 +1,15 @@
+{
+  "name": "db82-coordinate-transformation",
+  "version": "0.1.0",
+  "description": "",
+  "main": "CoordinateTransformations.js",
+  "dependencies": {
+    "db82-unit-conversion": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

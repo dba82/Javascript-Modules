@@ -1,0 +1,19 @@
+{
+  "name": "db82-shape-intersection-functions",
+  "version": "0.1.4",
+  "description": "",
+  "main": "Shape-Intersection-Functions.js",
+  "dependencies": {
+    "2d-vector-functions": "^2.0.3",
+    "db82-combinatorics": "^1.0.0",
+    "lodash.flatten": "^4.4.0",
+    "db82-shape-analytics": "^0.1.0",
+    "db82-shape-point-containment-functions": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "db82-canvas-shapes",
+  "version": "0.1.8",
+  "description": "",
+  "main": "Canvas-Shapes.js",
+  "dependencies": {
+    "db82-image-draw-functions": "^0.1.0",
+    "db82-simple-geometry-shapes": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

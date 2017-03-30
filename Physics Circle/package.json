@@ -1,0 +1,16 @@
+{
+  "name": "db82-physics-circle",
+  "version": "0.1.0",
+  "description": "",
+  "main": "Physics-Circle.js",
+  "dependencies": {
+    "db82-physics-body": "^0.1.12",
+    "db82-shape-analytics": "^0.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

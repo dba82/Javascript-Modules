@@ -1,0 +1,11 @@
+{
+  "name": "db82-scheduler",
+  "version": "0.1.1",
+  "description": "",
+  "main": "Scheduler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

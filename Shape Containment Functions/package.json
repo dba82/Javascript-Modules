@@ -1,0 +1,16 @@
+{
+  "name": "db82-shape-containment-functions",
+  "version": "0.1.4",
+  "description": "",
+  "main": "Shape-Containment-Functions.js",
+  "dependencies": {
+    "db82-shape-intersection-detectors": "^0.1.0",
+    "db82-shape-point-containment-functions": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

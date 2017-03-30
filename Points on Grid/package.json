@@ -1,0 +1,11 @@
+{
+  "name": "db82-points-on-grid",
+  "version": "0.1.0",
+  "description": "",
+  "main": "Points-on-Grid.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

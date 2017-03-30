@@ -1,0 +1,11 @@
+{
+  "name": "db82-element-click-coordinates",
+  "version": "1.0.2",
+  "description": "",
+  "main": "ElementClickCoordinates.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

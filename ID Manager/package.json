@@ -1,0 +1,11 @@
+{
+  "name": "db82-id-manager",
+  "version": "0.1.0",
+  "description": "",
+  "main": "ID-Manager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}

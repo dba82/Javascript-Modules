@@ -1,0 +1,11 @@
+{
+  "name": "db82-dom-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DOM-Utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "db82",
+  "license": "MIT"
+}
